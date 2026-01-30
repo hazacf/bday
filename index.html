@@ -353,15 +353,15 @@
             }
         }
 
-        // Confetti Celebration
+        // Confetti Celebration & Auto-Scroll
         function celebrate() {
-            // Play music if not already playing (browsers require interaction first)
+            // 1. Play Music
             if (!isPlaying) {
                 music.play();
                 isPlaying = true;
             }
 
-            // Fire confetti
+            // 2. Fire Confetti
             var duration = 5 * 1000;
             var animationEnd = Date.now() + duration;
             var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -378,6 +378,11 @@
                 // Random bursts
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
             }, 250);
+
+            // 3. NEW: Auto-Scroll to the Letter (after a small 0.5s pause for effect)
+            setTimeout(function() {
+                document.querySelector('.section').scrollIntoView({ behavior: 'smooth' });
+            }, 500);
         }
     </script>
 </body>
